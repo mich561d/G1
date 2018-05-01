@@ -6,7 +6,7 @@ TODO:
 2. Follow the plan
 3. Finish the plan
 
-#Links:
+# Links:
 http://www.datagenetics.com/blog/december32011/index.html
 http://www.ultrabattleship.com/tips.php
 http://www.somethinkodd.com/oddthinking/2009/10/29/battleship-strategy/
