@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * @author Michael
  */
-public class MensaShooter implements BattleshipsPlayer {
+public class ShooterAntiStrat implements BattleshipsPlayer {
 
     private final static Random RANDOM = new Random();
     private final static EnemyShootPosCounter ESPC = new EnemyShootPosCounter();
@@ -20,8 +20,8 @@ public class MensaShooter implements BattleshipsPlayer {
     private Board myBoard;
     // Shoot
     private int shotX, shotY;
-    
-    public MensaShooter() {
+
+    public ShooterAntiStrat() {
     }
 
     /**
