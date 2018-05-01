@@ -1,7 +1,7 @@
 package g1;
 
 /**
- * @author Michael, Christian og Jesper
+ * @author Michael
  */
 import battleship.interfaces.BattleshipsPlayer;
 import tournament.player.PlayerFactory;
