@@ -7,7 +7,7 @@ TODO:
 3. Finish the plan
 
 # Links:
-http://www.datagenetics.com/blog/december32011/index.html
-http://www.ultrabattleship.com/tips.php
-http://www.somethinkodd.com/oddthinking/2009/10/29/battleship-strategy/
-https://stackoverflow.com/questions/1631414/what-is-the-best-battleship-ai
+1. http://www.datagenetics.com/blog/december32011/index.html
+2. http://www.ultrabattleship.com/tips.php
+3. http://www.somethinkodd.com/oddthinking/2009/10/29/battleship-strategy/
+4. https://stackoverflow.com/questions/1631414/what-is-the-best-battleship-ai
