@@ -8,13 +8,6 @@ TODO:
 2. Follow the plan
 3. Finish the plan
 
-# Hvem står for hvad?
-**Jesper:**
-
-**Christian:**
-
-**Michael:** 
-
 # Links:
 1. http://www.datagenetics.com/blog/december32011/index.html
 2. http://www.ultrabattleship.com/tips.php
