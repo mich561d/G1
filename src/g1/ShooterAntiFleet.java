@@ -13,6 +13,7 @@ import java.util.Random;
 public class ShooterAntiFleet implements BattleshipsPlayer {
 
     private final static Random RANDOM = new Random();
+    private final static ShipZoneMap SZM = new ShipZoneMap();
     private final static EnemyShootPosCounter ESPC = new EnemyShootPosCounter();
     private final static HitPosCounter HPC = new HitPosCounter();
     // Board
@@ -45,6 +46,28 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
         myBoard = board;
         sizeX = board.sizeX();
         sizeY = board.sizeY();
+
+        for (int i = 0; i < fleet.getNumberOfShips(); i++) {
+            Ship ship = fleet.getShip(i);
+            int shipSize = ship.size();
+            switch (shipSize) {
+                case 2:
+                    placeDestroyer(ship);
+                    break;
+                case 3:
+                    placeCruiser(ship);
+                    break;
+                case 4:
+                    placeBattleship(ship);
+                    break;
+                case 5:
+                    placeCarrier(ship);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         for (int i = 0; i < fleet.getNumberOfShips(); ++i) {
             Ship s = fleet.getShip(i);
             boolean vertical = RANDOM.nextBoolean();
@@ -60,6 +83,57 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
             }
             board.placeShip(pos, s, vertical);
         }
+    }
+
+    private void placeDestroyer(Ship ship) {
+        boolean validPlacement = false, vertical = true; // Vertical = Lodret
+        int x = 0, y = 0;
+        Position startPos = new Position(x, y);
+
+        while (!validPlacement) {
+            vertical = RANDOM.nextBoolean();
+            x = RANDOM.nextInt(myBoard.sizeX());
+            y = RANDOM.nextInt(myBoard.sizeY());
+            startPos = new Position(x, y);
+            Position endPos;
+
+            if (vertical) {
+                endPos = new Position(x, y - 1);
+            } else {
+                endPos = new Position(x - 1, y);
+            }
+
+            boolean valid = SZM.destroyerMap(startPos, endPos);
+            if (valid) {
+                validPlacement = true;
+            } else {
+                if (vertical) {
+                    endPos = new Position(x, y + 1);
+                } else {
+                    endPos = new Position(x + 1, y);
+                }
+                valid = SZM.destroyerMap(startPos, endPos);
+                if (valid) {
+                    validPlacement = true;
+                }
+            }
+        }
+        myBoard.placeShip(startPos, ship, vertical);
+    }
+
+    private void placeCruiser(Ship ship) {
+
+        myBoard.placeShip(pos, s, vertical);
+    }
+
+    private void placeBattleship(Ship ship) {
+
+        myBoard.placeShip(pos, s, vertical);
+    }
+
+    private void placeCarrier(Ship ship) {
+
+        myBoard.placeShip(pos, s, vertical);
     }
 
     /**
