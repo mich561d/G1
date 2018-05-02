@@ -9,25 +9,27 @@ import tournament.player.PlayerFactory;
 public class G1 implements PlayerFactory<BattleshipsPlayer> {
 
     // SN = Shooter Number
-    private final int SN = 0; // 0 = Anti Fllet - 1 = Anti Strat - 2 = Mensa
+    //private final int SN = 0; // 0 = Anti Fllet - 1 = Anti Strat - 2 = Mensa
 
     @Override
     public BattleshipsPlayer getNewInstance() {
-        BattleshipsPlayer player = null;
-        switch (SN) {
-            case 0:
-                player = new ShooterAntiFleet();
-                break;
-            case 1:
-                player = new ShooterAntiStrat();
-                break;
-            case 2:
-                player = new ShooterMensa();
-                break;
-            default:
-                break;
-        }
-        return player;
+//        BattleshipsPlayer player = null;
+//        switch (SN) {
+//            case 0:
+//                player = new ShooterAntiFleet();
+//                break;
+//            case 1:
+//                player = new ShooterAntiStrat();
+//                break;
+//            case 2:
+//                player = new ShooterMensa();
+//                break;
+//            default:
+//                player = new ShooterAntiFleet();
+//                break;
+//        }
+//        return player;
+        return new ShooterAntiFleet();
     }
 
     @Override
@@ -37,7 +39,22 @@ public class G1 implements PlayerFactory<BattleshipsPlayer> {
 
     @Override
     public String getName() {
-        return "Mensa Shooter";
+        String name = "AntiFleet";
+//        switch (SN) {
+//            case 0:
+//                name = "AntiFleet";
+//                break;
+//            case 1:
+//                name = "AntiStrat";
+//                break;
+//            case 2:
+//                name = "Mensa";
+//                break;
+//            default:
+//                name = "AntiFleet";
+//                break;
+//        }
+        return name;
     }
 
     @Override

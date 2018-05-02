@@ -51,22 +51,6 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
                     break;
             }
         }
-
-        for (int i = 0; i < fleet.getNumberOfShips(); ++i) {
-            Ship s = fleet.getShip(i);
-            boolean vertical = RANDOM.nextBoolean();
-            Position pos;
-            if (vertical) {
-                int x = RANDOM.nextInt(sizeX);
-                int y = RANDOM.nextInt(sizeY - (s.size() - 1));
-                pos = new Position(x, y);
-            } else {
-                int x = RANDOM.nextInt(sizeX - (s.size() - 1));
-                int y = RANDOM.nextInt(sizeY);
-                pos = new Position(x, y);
-            }
-            board.placeShip(pos, s, vertical);
-        }
     }
 
     private void placeDestroyer(Ship ship) {
@@ -247,12 +231,11 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
     public void incoming(Position pos) {
         ESPC.countPosition(pos);
     }
-
+    
+    private int nextX = 0;
+    private int nextY = 0;
     @Override
     public Position getFireCoordinates(Fleet enemyShips) {
-        int nextX = 0;
-        int nextY = 0;
-
         Position shot = new Position(nextX, nextY);
         ++nextX;
         if (nextX >= sizeX) {
