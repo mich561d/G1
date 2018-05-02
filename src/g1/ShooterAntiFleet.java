@@ -66,24 +66,13 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
             Position endPos;
 
             if (vertical) {
-                endPos = new Position(x, y - 1);
+                endPos = new Position(x, y + 1);
             } else {
-                endPos = new Position(x - 1, y);
+                endPos = new Position(x + 1, y);
             }
-
             boolean valid = SZM.destroyerMap(startPos, endPos);
             if (valid) {
                 validPlacement = true;
-            } else {
-                if (vertical) {
-                    endPos = new Position(x, y + 1);
-                } else {
-                    endPos = new Position(x + 1, y);
-                }
-                valid = SZM.destroyerMap(startPos, endPos);
-                if (valid) {
-                    validPlacement = true;
-                }
             }
         }
         myBoard.placeShip(startPos, ship, vertical);
@@ -103,28 +92,15 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
             Position endPos;
 
             if (vertical) {
-                midPos = new Position(x, y - 1);
-                endPos = new Position(x, y - 2);
+                midPos = new Position(x, y + 1);
+                endPos = new Position(x, y + 2);
             } else {
-                midPos = new Position(x - 1, y);
-                endPos = new Position(x - 2, y);
+                midPos = new Position(x + 1, y);
+                endPos = new Position(x + 2, y);
             }
-
             boolean valid = SZM.cruiserMap(startPos, midPos, endPos);
             if (valid) {
                 validPlacement = true;
-            } else {
-                if (vertical) {
-                    midPos = new Position(x, y + 1);
-                    endPos = new Position(x, y + 2);
-                } else {
-                    midPos = new Position(x + 1, y);
-                    endPos = new Position(x + 2, y);
-                }
-                valid = SZM.cruiserMap(startPos, midPos, endPos);
-                if (valid) {
-                    validPlacement = true;
-                }
             }
         }
         myBoard.placeShip(startPos, ship, vertical);
@@ -145,32 +121,17 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
             Position endPos;
 
             if (vertical) {
-                startMidPos = new Position(x, y - 1);
-                endMidPos = new Position(x, y - 2);
-                endPos = new Position(x, y - 3);
+                startMidPos = new Position(x, y + 1);
+                endMidPos = new Position(x, y + 2);
+                endPos = new Position(x, y + 3);
             } else {
-                startMidPos = new Position(x - 3, y);
-                endMidPos = new Position(x - 3, y);
-                endPos = new Position(x - 3, y);
+                startMidPos = new Position(x + 3, y);
+                endMidPos = new Position(x + 3, y);
+                endPos = new Position(x + 3, y);
             }
-
             boolean valid = SZM.battleshipMap(startPos, startMidPos, endMidPos, endPos);
             if (valid) {
                 validPlacement = true;
-            } else {
-                if (vertical) {
-                    startMidPos = new Position(x, y + 1);
-                    endMidPos = new Position(x, y + 2);
-                    endPos = new Position(x, y + 3);
-                } else {
-                    startMidPos = new Position(x + 3, y);
-                    endMidPos = new Position(x + 3, y);
-                    endPos = new Position(x + 3, y);
-                }
-                valid = SZM.battleshipMap(startPos, startMidPos, endMidPos, endPos);
-                if (valid) {
-                    validPlacement = true;
-                }
             }
         }
         myBoard.placeShip(startPos, ship, vertical);
@@ -192,36 +153,19 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
             Position endPos;
 
             if (vertical) {
-                startMidPos = new Position(x, y - 1);
-                midPos = new Position(x, y - 2);
-                endMidPos = new Position(x, y - 3);
-                endPos = new Position(x, y - 4);
+                startMidPos = new Position(x, y + 1);
+                midPos = new Position(x, y + 2);
+                endMidPos = new Position(x, y + 3);
+                endPos = new Position(x, y + 4);
             } else {
-                startMidPos = new Position(x - 1, y);
-                midPos = new Position(x - 2, y);
-                endMidPos = new Position(x - 3, y);
-                endPos = new Position(x - 4, y);
+                startMidPos = new Position(x + 1, y);
+                midPos = new Position(x + 2, y);
+                endMidPos = new Position(x + 3, y);
+                endPos = new Position(x + 4, y);
             }
-
             boolean valid = SZM.carrierMap(startPos, startMidPos, midPos, endMidPos, endPos);
             if (valid) {
                 validPlacement = true;
-            } else {
-                if (vertical) {
-                    startMidPos = new Position(x, y + 1);
-                    midPos = new Position(x, y + 2);
-                    endMidPos = new Position(x, y + 3);
-                    endPos = new Position(x, y + 4);
-                } else {
-                    startMidPos = new Position(x + 1, y);
-                    midPos = new Position(x + 2, y);
-                    endMidPos = new Position(x + 3, y);
-                    endPos = new Position(x + 4, y);
-                }
-                valid = SZM.carrierMap(startPos, startMidPos, midPos, endMidPos, endPos);
-                if (valid) {
-                    validPlacement = true;
-                }
             }
         }
         myBoard.placeShip(startPos, ship, vertical);
@@ -231,9 +175,10 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
     public void incoming(Position pos) {
         ESPC.countPosition(pos);
     }
-    
+
     private int nextX = 0;
     private int nextY = 0;
+
     @Override
     public Position getFireCoordinates(Fleet enemyShips) {
         Position shot = new Position(nextX, nextY);
