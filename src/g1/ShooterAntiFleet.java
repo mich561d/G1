@@ -123,17 +123,17 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
 
     private void placeCruiser(Ship ship) {
 
-        myBoard.placeShip(pos, s, vertical);
+  //      myBoard.placeShip(pos, s, vertical);
     }
 
     private void placeBattleship(Ship ship) {
 
-        myBoard.placeShip(pos, s, vertical);
+    //    myBoard.placeShip(pos, s, vertical);
     }
 
     private void placeCarrier(Ship ship) {
 
-        myBoard.placeShip(pos, s, vertical);
+      //  myBoard.placeShip(pos, s, vertical);
     }
 
     /**
@@ -161,9 +161,23 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
      */
     @Override
     public Position getFireCoordinates(Fleet enemyShips) {
-        int x = RANDOM.nextInt(sizeX);
-        int y = RANDOM.nextInt(sizeY);
-        return new Position(x, y);
+        
+        
+        int nextX = 0;
+        int nextY = 0;
+        
+        Position shot = new Position(nextX, nextY);
+        ++nextX;
+        if(nextX >= sizeX)
+        {
+            nextX = 0; 
+            ++nextY;
+            if(nextY >= sizeY)
+            {
+                nextY = 0;
+            }
+        }
+        return shot;
     }
 
     /**
