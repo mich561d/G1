@@ -122,18 +122,141 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
     }
 
     private void placeCruiser(Ship ship) {
+        boolean validPlacement = false, vertical = true; // Vertical = Lodret
+        int x = 0, y = 0;
+        Position startPos = new Position(x, y);
 
-        myBoard.placeShip(pos, s, vertical);
+        while (!validPlacement) {
+            vertical = RANDOM.nextBoolean();
+            x = RANDOM.nextInt(myBoard.sizeX());
+            y = RANDOM.nextInt(myBoard.sizeY());
+            startPos = new Position(x, y);
+            Position midPos;
+            Position endPos;
+
+            if (vertical) {
+                midPos = new Position(x, y - 1);
+                endPos = new Position(x, y - 2);
+            } else {
+                midPos = new Position(x - 1, y);
+                endPos = new Position(x - 2, y);
+            }
+
+            boolean valid = SZM.cruiserMap(startPos, midPos, endPos);
+            if (valid) {
+                validPlacement = true;
+            } else {
+                if (vertical) {
+                    midPos = new Position(x, y + 1);
+                    endPos = new Position(x, y + 2);
+                } else {
+                    midPos = new Position(x + 1, y);
+                    endPos = new Position(x + 2, y);
+                }
+                valid = SZM.cruiserMap(startPos, midPos, endPos);
+                if (valid) {
+                    validPlacement = true;
+                }
+            }
+        }
+        myBoard.placeShip(startPos, ship, vertical);
     }
 
     private void placeBattleship(Ship ship) {
+        boolean validPlacement = false, vertical = true; // Vertical = Lodret
+        int x = 0, y = 0;
+        Position startPos = new Position(x, y);
 
-        myBoard.placeShip(pos, s, vertical);
+        while (!validPlacement) {
+            vertical = RANDOM.nextBoolean();
+            x = RANDOM.nextInt(myBoard.sizeX());
+            y = RANDOM.nextInt(myBoard.sizeY());
+            startPos = new Position(x, y);
+            Position startMidPos;
+            Position endMidPos;
+            Position endPos;
+
+            if (vertical) {
+                startMidPos = new Position(x, y - 1);
+                endMidPos = new Position(x, y - 2);
+                endPos = new Position(x, y - 3);
+            } else {
+                startMidPos = new Position(x - 3, y);
+                endMidPos = new Position(x - 3, y);
+                endPos = new Position(x - 3, y);
+            }
+
+            boolean valid = SZM.battleshipMap(startPos, startMidPos, endMidPos, endPos);
+            if (valid) {
+                validPlacement = true;
+            } else {
+                if (vertical) {
+                    startMidPos = new Position(x, y + 1);
+                    endMidPos = new Position(x, y + 2);
+                    endPos = new Position(x, y + 3);
+                } else {
+                    startMidPos = new Position(x + 3, y);
+                    endMidPos = new Position(x + 3, y);
+                    endPos = new Position(x + 3, y);
+                }
+                valid = SZM.battleshipMap(startPos, startMidPos, endMidPos, endPos);
+                if (valid) {
+                    validPlacement = true;
+                }
+            }
+        }
+        myBoard.placeShip(startPos, ship, vertical);
     }
 
     private void placeCarrier(Ship ship) {
+        boolean validPlacement = false, vertical = true; // Vertical = Lodret
+        int x = 0, y = 0;
+        Position startPos = new Position(x, y);
 
-        myBoard.placeShip(pos, s, vertical);
+        while (!validPlacement) {
+            vertical = RANDOM.nextBoolean();
+            x = RANDOM.nextInt(myBoard.sizeX());
+            y = RANDOM.nextInt(myBoard.sizeY());
+            startPos = new Position(x, y);
+            Position startMidPos;
+            Position midPos;
+            Position endMidPos;
+            Position endPos;
+
+            if (vertical) {
+                startMidPos = new Position(x, y - 1);
+                midPos = new Position(x, y - 2);
+                endMidPos = new Position(x, y - 3);
+                endPos = new Position(x, y - 4);
+            } else {
+                startMidPos = new Position(x - 1, y);
+                midPos = new Position(x - 2, y);
+                endMidPos = new Position(x - 3, y);
+                endPos = new Position(x - 4, y);
+            }
+
+            boolean valid = SZM.carrierMap(startPos, startMidPos, midPos, endMidPos, endPos);
+            if (valid) {
+                validPlacement = true;
+            } else {
+                if (vertical) {
+                    startMidPos = new Position(x, y + 1);
+                    midPos = new Position(x, y + 2);
+                    endMidPos = new Position(x, y + 3);
+                    endPos = new Position(x, y + 4);
+                } else {
+                    startMidPos = new Position(x + 1, y);
+                    midPos = new Position(x + 2, y);
+                    endMidPos = new Position(x + 3, y);
+                    endPos = new Position(x + 4, y);
+                }
+                valid = SZM.carrierMap(startPos, startMidPos, midPos, endMidPos, endPos);
+                if (valid) {
+                    validPlacement = true;
+                }
+            }
+        }
+        myBoard.placeShip(startPos, ship, vertical);
     }
 
     /**
