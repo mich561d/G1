@@ -19,6 +19,9 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
     // Board
     private int sizeX, sizeY;
     private Board myBoard;
+    // Ships
+    private int nextX;
+    private int nextY;
     // Shoot
     private int shotX, shotY;
 
@@ -27,7 +30,7 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
 
     @Override
     public void placeShips(Fleet fleet, Board board) {
-        myBoard = board;
+        /*myBoard = board;
         sizeX = board.sizeX();
         sizeY = board.sizeY();
 
@@ -50,6 +53,29 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
                 default:
                     break;
             }
+        }*/
+        nextX = 0;
+        nextY = 0;
+        sizeX = board.sizeX();
+        sizeY = board.sizeY();
+        for(int i = 0; i < fleet.getNumberOfShips(); ++i)
+        {
+            Ship s = fleet.getShip(i);
+            boolean vertical = RANDOM.nextBoolean();
+            Position pos;
+            if(vertical)
+            {
+                int x = RANDOM.nextInt(sizeX);
+                int y = RANDOM.nextInt(sizeY-(s.size()-1));
+                pos = new Position(x, y);
+            }
+            else
+            {
+                int x = RANDOM.nextInt(sizeX-(s.size()-1));
+                int y = RANDOM.nextInt(sizeY);
+                pos = new Position(x, y);
+            }
+            board.placeShip(pos, s, vertical);
         }
     }
 
@@ -176,18 +202,15 @@ public class ShooterAntiFleet implements BattleshipsPlayer {
         ESPC.countPosition(pos);
     }
 
-    private int nextX = 0;
-    private int nextY = 0;
-
     @Override
     public Position getFireCoordinates(Fleet enemyShips) {
-        Position shot = new Position(nextX, nextY);
-        ++nextX;
-        if (nextX >= sizeX) {
-            nextX = 0;
-            ++nextY;
-            if (nextY >= sizeY) {
-                nextY = 0;
+        Position shot = new Position(shotX, shotY);
+        ++shotX;
+        if (shotX >= sizeX) {
+            shotX = 0;
+            ++shotY;
+            if (shotY >= sizeY) {
+                shotY = 0;
             }
         }
         return shot;
