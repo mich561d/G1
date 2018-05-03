@@ -1,4 +1,4 @@
-package g1.placers;
+package g1.ships;
 
 import battleship.interfaces.Position;
 import battleship.interfaces.Ship;

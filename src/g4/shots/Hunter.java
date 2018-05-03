@@ -1,4 +1,4 @@
-package g4.shooters;
+package g4.shots;
 
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
@@ -6,7 +6,7 @@ import battleship.interfaces.Ship;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import g1.maps.IntMap;
+import g1.map.IntMap;
 
 public class Hunter {
 

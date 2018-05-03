@@ -1,4 +1,4 @@
-package g4.shooters;
+package g4.shots;
 
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import g1.maps.FloatMap;
-import g1.maps.IntMap;
+import g1.map.FloatMap;
+import g1.map.IntMap;
 
 public class Seeker {
 

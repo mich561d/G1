@@ -1,4 +1,4 @@
-package g1.placers;
+package g1.ships;
 
 import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import g1.maps.BooleanMap;
-import g1.maps.IntMap;
+import g1.map.BooleanMap;
+import g1.map.IntMap;
 
 public class ShipPlacer {
 

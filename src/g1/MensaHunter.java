@@ -5,10 +5,10 @@ import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
 import java.util.Random;
-import g1.maps.FloatMap;
-import g1.placers.HotspotBoard;
-import g1.placers.ShipPlacer;
-import g4.shooters.Shooter;
+import g1.map.FloatMap;
+import g1.ships.HotspotBoard;
+import g1.ships.ShipPlacer;
+import g4.shots.Shooter;
 
 public class MensaHunter implements BattleshipsPlayer {
 
