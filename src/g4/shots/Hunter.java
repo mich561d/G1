@@ -10,46 +10,44 @@ import g1.maps.IntMap;
 
 public class Hunter {
 
-    private final Random rnd;
-    private final IntMap shots;
-    private final IntMap shipDist;
-    private final List<Position> hits;
+    private final Random RANDOM;
+    private final IntMap SHOTS, SHIPDIST;
+    private final List<Position> HITS;
     private Position lastShot;
-    private int numHits;
-    private int startFleetSum;
+    private int numHits, startFleetSum;
 
     public Hunter(IntMap shots, Random rnd) {
-        this.rnd = rnd;
-        this.shots = shots;
-        this.shipDist = new IntMap(shots.getXSize(), shots.getYSize());
-        this.hits = new ArrayList();
+        this.RANDOM = rnd;
+        this.SHOTS = shots;
+        this.SHIPDIST = new IntMap(shots.getXSize(), shots.getYSize());
+        this.HITS = new ArrayList();
     }
 
     public void startHunt(Position pos, Fleet fleet) {
         this.numHits = 1;
         this.startFleetSum = fleetSum(fleet);
-        this.hits.clear();
-        this.hits.add(pos);
+        this.HITS.clear();
+        this.HITS.add(pos);
     }
 
     public Position getFireCoordinates(Fleet enemyShips) {
         generateShipDistribution(enemyShips);
-        List<Position> bestCoordinates = this.shipDist.getHighest();
-        this.lastShot = ((Position) bestCoordinates.get(this.rnd.nextInt(bestCoordinates.size())));
+        List<Position> bestCoordinates = this.SHIPDIST.getHighest();
+        this.lastShot = ((Position) bestCoordinates.get(this.RANDOM.nextInt(bestCoordinates.size())));
         return this.lastShot;
     }
 
     public boolean hitFeedback(boolean hit, Fleet enemyShips) {
-        this.shots.set(this.lastShot.x, this.lastShot.y, hit ? 1 : -1);
+        this.SHOTS.set(this.lastShot.x, this.lastShot.y, hit ? 1 : -1);
         if (hit) {
             this.numHits += 1;
-            this.hits.add(this.lastShot);
+            this.HITS.add(this.lastShot);
             int curFleetSum = fleetSum(enemyShips);
             if (curFleetSum < this.startFleetSum) {
                 this.numHits -= this.startFleetSum - curFleetSum;
                 if (this.numHits == 0) {
-                    for (Position p : this.hits) {
-                        this.shots.set(p.x, p.y, -2);
+                    for (Position p : this.HITS) {
+                        this.SHOTS.set(p.x, p.y, -2);
                     }
                     return false;
                 }
@@ -68,16 +66,16 @@ public class Hunter {
     }
 
     private void generateShipDistribution(Fleet enemyShips) {
-        this.shipDist.clear();
+        this.SHIPDIST.clear();
         for (Ship s : enemyShips) {
-            int maxX = this.shipDist.getXSize() - s.size();
-            int maxY = this.shipDist.getYSize() - 1;
+            int maxX = this.SHIPDIST.getXSize() - s.size();
+            int maxY = this.SHIPDIST.getYSize() - 1;
             for (int y = 0; y <= maxY; y++) {
                 for (int x = 0; x <= maxX; x++) {
                     boolean canPlace = true;
                     int hitCount = 0;
                     for (int i = 0; i < s.size(); i++) {
-                        int val = this.shots.get(x + i, y);
+                        int val = this.SHOTS.get(x + i, y);
                         if (val < 0) {
                             canPlace = false;
                             break;
@@ -88,22 +86,22 @@ public class Hunter {
                     }
                     if (canPlace) {
                         for (int i = 0; i < s.size(); i++) {
-                            int val = this.shots.get(x + i, y);
+                            int val = this.SHOTS.get(x + i, y);
                             if (val == 0) {
-                                this.shipDist.add(x + i, y, hitCount);
+                                this.SHIPDIST.add(x + i, y, hitCount);
                             }
                         }
                     }
                 }
             }
-            maxX = this.shipDist.getXSize() - 1;
-            maxY = this.shipDist.getYSize() - s.size();
+            maxX = this.SHIPDIST.getXSize() - 1;
+            maxY = this.SHIPDIST.getYSize() - s.size();
             for (int y = 0; y <= maxY; y++) {
                 for (int x = 0; x <= maxX; x++) {
                     boolean canPlace = true;
                     int hitCount = 0;
                     for (int i = 0; i < s.size(); i++) {
-                        int val = this.shots.get(x, y + i);
+                        int val = this.SHOTS.get(x, y + i);
                         if (val < 0) {
                             canPlace = false;
                             break;
@@ -114,9 +112,9 @@ public class Hunter {
                     }
                     if (canPlace) {
                         for (int i = 0; i < s.size(); i++) {
-                            int val = this.shots.get(x, y + i);
+                            int val = this.SHOTS.get(x, y + i);
                             if (val == 0) {
-                                this.shipDist.add(x, y + i, hitCount);
+                                this.SHIPDIST.add(x, y + i, hitCount);
                             }
                         }
                     }

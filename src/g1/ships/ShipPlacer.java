@@ -13,33 +13,31 @@ import g1.maps.IntMap;
 
 public class ShipPlacer {
 
-    private boolean adjacentShips = true;
-    private boolean useHeatMap = true;
-    private final Random rnd;
+    private final boolean ADJECENTSHIPS = false, USEHEATMAP = true;
+    private final Random RANDOM;
     private int shotValue;
-    private final int xSize;
-    private final int ySize;
-    private final IntMap heatMap;
-    private final BooleanMap shipMap;
-    private final Position[][] positions;
+    private final int XSIZE, YSIZE;
+    private final IntMap HEATMAP;
+    private final BooleanMap SHIPMAP;
+    private final Position[][] POSITIONS;
 
     public ShipPlacer(int xSize, int ySize, Random rnd) {
-        this.rnd = rnd;
-        this.xSize = xSize;
-        this.ySize = ySize;
-        this.heatMap = new IntMap(xSize, ySize);
-        this.shipMap = new BooleanMap(xSize, ySize);
-        this.positions = new Position[xSize][ySize];
+        this.RANDOM = rnd;
+        this.XSIZE = xSize;
+        this.YSIZE = ySize;
+        this.HEATMAP = new IntMap(xSize, ySize);
+        this.SHIPMAP = new BooleanMap(xSize, ySize);
+        this.POSITIONS = new Position[xSize][ySize];
         for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
-                this.positions[x][y] = new Position(x, y);
+                this.POSITIONS[x][y] = new Position(x, y);
             }
         }
     }
 
     public void placeShips(Fleet fleet, Board board) {
-        this.shotValue = (this.xSize * this.ySize);
-        this.shipMap.clear();
+        this.shotValue = (this.XSIZE * this.YSIZE);
+        this.SHIPMAP.clear();
 
         List<Ship> ships = new ArrayList(fleet.getNumberOfShips());
         for (Ship s : fleet) {
@@ -56,7 +54,7 @@ public class ShipPlacer {
     }
 
     public void incoming(Position pos) {
-        this.heatMap.add(pos.x, pos.y, this.shotValue--);
+        this.HEATMAP.add(pos.x, pos.y, this.shotValue--);
     }
 
     private ShipConf selectConf(List<ShipConf> confs) {
@@ -64,7 +62,7 @@ public class ShipPlacer {
         if (confs.isEmpty()) {
             return null;
         }
-        if (this.useHeatMap) {
+        if (this.USEHEATMAP) {
             Collections.sort(confs);
             int bestValue = ((ShipConf) confs.get(0)).getValue();
             count = 1;
@@ -76,7 +74,7 @@ public class ShipPlacer {
                 count++;
             }
         }
-        return (ShipConf) confs.get(this.rnd.nextInt(count));
+        return (ShipConf) confs.get(this.RANDOM.nextInt(count));
     }
 
     private void placeShip(ShipConf conf, Board board) {
@@ -84,7 +82,7 @@ public class ShipPlacer {
         board.placeShip(conf.getPosition(), conf.getShip(), conf.getVertical());
         if (conf.getVertical()) {
             int x = conf.getPosition().x;
-            if (!this.adjacentShips) {
+            if (!this.ADJECENTSHIPS) {
                 int y = conf.getPosition().y - 1;
                 markShipPoint(x, y);
 
@@ -93,17 +91,17 @@ public class ShipPlacer {
             }
             int y = conf.getPosition().y;
             for (int i = 0; i < size; i++) {
-                if (!this.adjacentShips) {
+                if (!this.ADJECENTSHIPS) {
                     markShipPoint(x - 1, y + i);
                 }
                 markShipPoint(x, y + i);
-                if (!this.adjacentShips) {
+                if (!this.ADJECENTSHIPS) {
                     markShipPoint(x + 1, y + i);
                 }
             }
         } else {
             int y = conf.getPosition().y;
-            if (!this.adjacentShips) {
+            if (!this.ADJECENTSHIPS) {
                 int x = conf.getPosition().x - 1;
                 markShipPoint(x, y);
 
@@ -112,11 +110,11 @@ public class ShipPlacer {
             }
             int x = conf.getPosition().x;
             for (int i = 0; i < size; i++) {
-                if (!this.adjacentShips) {
+                if (!this.ADJECENTSHIPS) {
                     markShipPoint(x + i, y - 1);
                 }
                 markShipPoint(x + i, y);
-                if (!this.adjacentShips) {
+                if (!this.ADJECENTSHIPS) {
                     markShipPoint(x + i, y + 1);
                 }
             }
@@ -124,43 +122,43 @@ public class ShipPlacer {
     }
 
     private void markShipPoint(int x, int y) {
-        if ((x >= 0) && (x < this.xSize) && (y >= 0) && (y < this.ySize)) {
-            this.shipMap.mark(x, y);
+        if ((x >= 0) && (x < this.XSIZE) && (y >= 0) && (y < this.YSIZE)) {
+            this.SHIPMAP.mark(x, y);
         }
     }
 
     private List<ShipConf> getConfigurations(Ship ship) {
         int size = ship.size();
         List<ShipConf> res = new ArrayList();
-        for (int y = 0; y < this.ySize; y++) {
-            for (int x = 0; x <= this.xSize - size; x++) {
+        for (int y = 0; y < this.YSIZE; y++) {
+            for (int x = 0; x <= this.XSIZE - size; x++) {
                 boolean validPos = true;
                 int value = 0;
                 for (int i = 0; i < size; i++) {
-                    if (this.shipMap.getPos(x + i, y)) {
+                    if (this.SHIPMAP.getPos(x + i, y)) {
                         validPos = false;
                         break;
                     }
-                    value += this.heatMap.get(x + i, y);
+                    value += this.HEATMAP.get(x + i, y);
                 }
                 if (validPos) {
-                    res.add(new ShipConf(ship, this.positions[x][y], false, value));
+                    res.add(new ShipConf(ship, this.POSITIONS[x][y], false, value));
                 }
             }
         }
-        for (int y = 0; y <= this.ySize - size; y++) {
-            for (int x = 0; x < this.xSize; x++) {
+        for (int y = 0; y <= this.YSIZE - size; y++) {
+            for (int x = 0; x < this.XSIZE; x++) {
                 boolean validPos = true;
                 int value = 0;
                 for (int i = 0; i < size; i++) {
-                    if (this.shipMap.getPos(x, y + i)) {
+                    if (this.SHIPMAP.getPos(x, y + i)) {
                         validPos = false;
                         break;
                     }
-                    value += this.heatMap.get(x, y + i);
+                    value += this.HEATMAP.get(x, y + i);
                 }
                 if (validPos) {
-                    res.add(new ShipConf(ship, this.positions[x][y], true, value));
+                    res.add(new ShipConf(ship, this.POSITIONS[x][y], true, value));
                 }
             }
         }

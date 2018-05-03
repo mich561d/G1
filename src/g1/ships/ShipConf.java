@@ -5,35 +5,36 @@ import battleship.interfaces.Ship;
 
 public class ShipConf implements Comparable<ShipConf> {
 
-    private final Ship ship;
-    private final Position pos;
-    private final boolean vertical;
-    private final int value;
+    private final Ship SHIP;
+    private final Position POS;
+    private final boolean VERTICAL;
+    private final int VALUE;
 
     public ShipConf(Ship ship, Position pos, boolean vertical, int value) {
-        this.ship = ship;
-        this.pos = pos;
-        this.vertical = vertical;
-        this.value = value;
+        this.SHIP = ship;
+        this.POS = pos;
+        this.VERTICAL = vertical;
+        this.VALUE = value;
     }
 
     public Ship getShip() {
-        return this.ship;
+        return this.SHIP;
     }
 
     public Position getPosition() {
-        return this.pos;
+        return this.POS;
     }
 
     public boolean getVertical() {
-        return this.vertical;
+        return this.VERTICAL;
     }
 
     public int getValue() {
-        return this.value;
+        return this.VALUE;
     }
 
-    public int compareTo(ShipConf o) {
-        return this.value - o.value;
+    @Override
+    public int compareTo(ShipConf object) {
+        return this.VALUE - object.VALUE;
     }
 }

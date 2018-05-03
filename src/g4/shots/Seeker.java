@@ -12,27 +12,25 @@ import g1.maps.IntMap;
 
 public class Seeker {
 
-    private final boolean useOwnHeat = true;
-    private final Random rnd;
-    private final IntMap shots;
-    private final FloatMap shipDist;
-    private final IntMap ownHeat;
+    private final Random RANDOM;
+    private final IntMap SHOTS, OWNHEAT;
+    private final FloatMap SHIPDIST;
     private Position lastShot;
 
     public Seeker(IntMap shots, Random rnd, IntMap ownHeat) {
-        this.rnd = rnd;
-        this.shots = shots;
-        this.shipDist = new FloatMap(shots.getXSize(), shots.getYSize());
-        this.ownHeat = ownHeat;
+        this.RANDOM = rnd;
+        this.SHOTS = shots;
+        this.SHIPDIST = new FloatMap(shots.getXSize(), shots.getYSize());
+        this.OWNHEAT = ownHeat;
     }
 
     public Position getFireCoordinates(IntMap hotSpots, Fleet enemyShips) {
         generateShipDistribution(enemyShips);
-        List<Position> bestCoordinates = this.shipDist.getHighest();
+        List<Position> bestCoordinates = this.SHIPDIST.getHighest();
 
-        bestCoordinates = avoidHeat(bestCoordinates, this.ownHeat);
+        bestCoordinates = avoidHeat(bestCoordinates, this.OWNHEAT);
 
-        this.lastShot = ((Position) bestCoordinates.get(this.rnd.nextInt(bestCoordinates.size())));
+        this.lastShot = ((Position) bestCoordinates.get(this.RANDOM.nextInt(bestCoordinates.size())));
         return this.lastShot;
     }
 
@@ -58,15 +56,15 @@ public class Seeker {
     }
 
     private void generateShipDistribution(Fleet enemyShips) {
-        this.shipDist.clear();
+        this.SHIPDIST.clear();
         for (Ship s : enemyShips) {
-            int maxX = this.shipDist.getXSize() - s.size();
-            int maxY = this.shipDist.getYSize() - 1;
+            int maxX = this.SHIPDIST.getXSize() - s.size();
+            int maxY = this.SHIPDIST.getYSize() - 1;
             for (int y = 0; y <= maxY; y++) {
                 for (int x = 0; x <= maxX; x++) {
                     boolean canPlace = true;
                     for (int i = 0; i < s.size(); i++) {
-                        int val = this.shots.get(x + i, y);
+                        int val = this.SHOTS.get(x + i, y);
                         if (val != 0) {
                             canPlace = false;
                             break;
@@ -74,18 +72,18 @@ public class Seeker {
                     }
                     if (canPlace) {
                         for (int i = 0; i < s.size(); i++) {
-                            this.shipDist.add(x + i, y, 1.0F);
+                            this.SHIPDIST.add(x + i, y, 1.0F);
                         }
                     }
                 }
             }
-            maxX = this.shipDist.getXSize() - 1;
-            maxY = this.shipDist.getYSize() - s.size();
+            maxX = this.SHIPDIST.getXSize() - 1;
+            maxY = this.SHIPDIST.getYSize() - s.size();
             for (int y = 0; y <= maxY; y++) {
                 for (int x = 0; x <= maxX; x++) {
                     boolean canPlace = true;
                     for (int i = 0; i < s.size(); i++) {
-                        int val = this.shots.get(x, y + i);
+                        int val = this.SHOTS.get(x, y + i);
                         if (val != 0) {
                             canPlace = false;
                             break;
@@ -93,7 +91,7 @@ public class Seeker {
                     }
                     if (canPlace) {
                         for (int i = 0; i < s.size(); i++) {
-                            this.shipDist.add(x, y + i, 1.0F);
+                            this.SHIPDIST.add(x, y + i, 1.0F);
                         }
                     }
                 }

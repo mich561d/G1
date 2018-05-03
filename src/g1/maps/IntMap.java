@@ -6,57 +6,56 @@ import java.util.List;
 
 public class IntMap {
 
-    private final int[][] map;
-    private final int xSize;
-    private final int ySize;
+    private final int[][] MAP;
+    private final int XSIZE, YSIZE;
 
     public IntMap(int xSize, int ySize) {
-        this.map = new int[xSize][ySize];
-        this.xSize = xSize;
-        this.ySize = ySize;
+        this.MAP = new int[xSize][ySize];
+        this.XSIZE = xSize;
+        this.YSIZE = ySize;
     }
 
     public int getXSize() {
-        return this.xSize;
+        return this.XSIZE;
     }
 
     public int getYSize() {
-        return this.ySize;
+        return this.YSIZE;
     }
 
     public void clear() {
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                this.map[x][y] = 0;
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                this.MAP[x][y] = 0;
             }
         }
     }
 
     public void set(int x, int y, int value) {
-        this.map[x][y] = value;
+        this.MAP[x][y] = value;
     }
 
     public void add(int x, int y, int i) {
-        this.map[x][y] += i;
+        this.MAP[x][y] += i;
     }
 
     public int get(int x, int y) {
-        return this.map[x][y];
+        return this.MAP[x][y];
     }
 
     public List<Position> getHighest() {
         int max = Integer.MIN_VALUE;
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                if (this.map[x][y] > max) {
-                    max = this.map[x][y];
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                if (this.MAP[x][y] > max) {
+                    max = this.MAP[x][y];
                 }
             }
         }
         List<Position> res = new ArrayList();
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                if (this.map[x][y] == max) {
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                if (this.MAP[x][y] == max) {
                     res.add(new Position(x, y));
                 }
             }
@@ -66,9 +65,9 @@ public class IntMap {
 
     public List<Position> getNonZero() {
         List<Position> res = new ArrayList();
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                if (this.map[x][y] > 0) {
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                if (this.MAP[x][y] > 0) {
                     res.add(new Position(x, y));
                 }
             }
@@ -76,11 +75,12 @@ public class IntMap {
         return res;
     }
 
+    @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        for (int y = 0; y < this.ySize; y++) {
-            for (int x = 0; x < this.xSize; x++) {
-                res.append(this.map[x][y]);
+        for (int y = 0; y < this.YSIZE; y++) {
+            for (int x = 0; x < this.XSIZE; x++) {
+                res.append(this.MAP[x][y]);
                 res.append(' ');
             }
             res.append('\n');

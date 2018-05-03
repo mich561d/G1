@@ -6,67 +6,66 @@ import java.util.List;
 
 public class FloatMap {
 
-    private final float[][] map;
-    private final int xSize;
-    private final int ySize;
+    private final float[][] MAP;
+    private final int XSIZE, YSIZE;
 
     public FloatMap(int xSize, int ySize) {
-        this.map = new float[xSize][ySize];
-        this.xSize = xSize;
-        this.ySize = ySize;
+        this.MAP = new float[xSize][ySize];
+        this.XSIZE = xSize;
+        this.YSIZE = ySize;
     }
 
     public int getXSize() {
-        return this.xSize;
+        return this.XSIZE;
     }
 
     public int getYSize() {
-        return this.ySize;
+        return this.YSIZE;
     }
 
     public void clear() {
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                this.map[x][y] = 0.0F;
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                this.MAP[x][y] = 0.0F;
             }
         }
     }
 
     public void setAll(float f) {
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                this.map[x][y] = f;
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                this.MAP[x][y] = f;
             }
         }
     }
 
     public void set(int x, int y, float f) {
-        this.map[x][y] = f;
+        this.MAP[x][y] = f;
     }
 
     public void add(int x, int y, float f) {
-        this.map[x][y] += f;
+        this.MAP[x][y] += f;
     }
 
     public float get(int x, int y) {
-        return this.map[x][y];
+        return this.MAP[x][y];
     }
 
     public FloatMap getNormalized() {
         float max = 0.0F;
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                if (this.map[x][y] > max) {
-                    max = this.map[x][y];
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                if (this.MAP[x][y] > max) {
+                    max = this.MAP[x][y];
                 }
             }
         }
-        FloatMap res = new FloatMap(this.xSize, this.ySize);
+        FloatMap res = new FloatMap(this.XSIZE, this.YSIZE);
         if (max > 0.0F) {
             float invMax = 1.0F / max;
-            for (int x = 0; x < this.xSize; x++) {
-                for (int y = 0; y < this.ySize; y++) {
-                    res.map[x][y] = (invMax * this.map[x][y]);
+            for (int x = 0; x < this.XSIZE; x++) {
+                for (int y = 0; y < this.YSIZE; y++) {
+                    res.MAP[x][y] = (invMax * this.MAP[x][y]);
                 }
             }
         }
@@ -75,18 +74,18 @@ public class FloatMap {
 
     public void normalize() {
         float max = 0.0F;
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                if (this.map[x][y] > max) {
-                    max = this.map[x][y];
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                if (this.MAP[x][y] > max) {
+                    max = this.MAP[x][y];
                 }
             }
         }
         if (max > 0.0F) {
             float invMax = 1.0F / max;
-            for (int x = 0; x < this.xSize; x++) {
-                for (int y = 0; y < this.ySize; y++) {
-                    this.map[x][y] *= invMax;
+            for (int x = 0; x < this.XSIZE; x++) {
+                for (int y = 0; y < this.YSIZE; y++) {
+                    this.MAP[x][y] *= invMax;
                 }
             }
         }
@@ -94,17 +93,17 @@ public class FloatMap {
 
     public List<Position> getHighest() {
         float max = 0.0F;
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                if (this.map[x][y] > max) {
-                    max = this.map[x][y];
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                if (this.MAP[x][y] > max) {
+                    max = this.MAP[x][y];
                 }
             }
         }
         List<Position> res = new ArrayList();
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                if (this.map[x][y] == max) {
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                if (this.MAP[x][y] == max) {
                     res.add(new Position(x, y));
                 }
             }
@@ -113,33 +112,34 @@ public class FloatMap {
     }
 
     public FloatMap reverse() {
-        FloatMap res = new FloatMap(this.xSize, this.ySize);
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                res.map[x][y] = (1.0F - this.map[x][y]);
+        FloatMap res = new FloatMap(this.XSIZE, this.YSIZE);
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                res.MAP[x][y] = (1.0F - this.MAP[x][y]);
             }
         }
         return res;
     }
 
     public FloatMap add(FloatMap fMap) {
-        if ((this.xSize != fMap.xSize) || (this.ySize != fMap.ySize)) {
+        if ((this.XSIZE != fMap.XSIZE) || (this.YSIZE != fMap.YSIZE)) {
             throw new RuntimeException("FloatMap.add -> Maps are not the same size...");
         }
-        FloatMap res = new FloatMap(this.xSize, this.ySize);
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                this.map[x][y] += fMap.map[x][y];
+        FloatMap res = new FloatMap(this.XSIZE, this.YSIZE);
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                this.MAP[x][y] += fMap.MAP[x][y];
             }
         }
         return res;
     }
 
+    @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        for (int y = 0; y < this.ySize; y++) {
-            for (int x = 0; x < this.xSize; x++) {
-                res.append(this.map[x][y]);
+        for (int y = 0; y < this.YSIZE; y++) {
+            for (int x = 0; x < this.XSIZE; x++) {
+                res.append(this.MAP[x][y]);
                 res.append(' ');
             }
             res.append('\n');
@@ -149,21 +149,21 @@ public class FloatMap {
 
     public Position getWeightedRandom(float random) {
         float sum = 0.0F;
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                sum += this.map[x][y];
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                sum += this.MAP[x][y];
             }
         }
         float r = sum * random;
         sum = 0.0F;
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                sum += this.map[x][y];
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                sum += this.MAP[x][y];
                 if (sum >= r) {
                     return new Position(x, y);
                 }
             }
         }
-        return new Position(this.xSize - 1, this.ySize - 1);
+        return new Position(this.XSIZE - 1, this.YSIZE - 1);
     }
 }

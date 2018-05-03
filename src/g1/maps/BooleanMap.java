@@ -2,41 +2,40 @@ package g1.maps;
 
 public class BooleanMap {
 
-    private final boolean[][] map;
-    private final int xSize;
-    private final int ySize;
+    private final boolean[][] MAP;
+    private final int XSIZE, YSIZE;
 
     public BooleanMap(int xSize, int ySize) {
-        this.map = new boolean[xSize][ySize];
-        this.xSize = xSize;
-        this.ySize = ySize;
+        this.MAP = new boolean[xSize][ySize];
+        this.XSIZE = xSize;
+        this.YSIZE = ySize;
     }
 
     public int getXSize() {
-        return this.xSize;
+        return this.XSIZE;
     }
 
     public int getYSize() {
-        return this.ySize;
+        return this.YSIZE;
     }
 
     public void clear() {
-        for (int x = 0; x < this.xSize; x++) {
-            for (int y = 0; y < this.ySize; y++) {
-                this.map[x][y] = false;
+        for (int x = 0; x < this.XSIZE; x++) {
+            for (int y = 0; y < this.YSIZE; y++) {
+                this.MAP[x][y] = false;
             }
         }
     }
 
     public void mark(int x, int y) {
-        this.map[x][y] = true;
+        this.MAP[x][y] = true;
     }
 
     public void unMark(int x, int y) {
-        this.map[x][y] = false;
+        this.MAP[x][y] = false;
     }
 
     public boolean getPos(int x, int y) {
-        return this.map[x][y];
+        return this.MAP[x][y];
     }
 }

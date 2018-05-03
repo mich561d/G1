@@ -7,51 +7,50 @@ import g1.maps.IntMap;
 
 public class Shooter {
 
-    private final IntMap shots;
+    private final IntMap SHOTS;
     private Position lastShot;
     private boolean isHunting;
-    private final Hunter hunter;
-    private final Seeker seeker;
-    private final IntMap hotSpots;
-    private final IntMap ownHeatMap;
+    private final Hunter HUNTER;
+    private final Seeker SEEKER;
+    private final IntMap HOTSPOTS, OWNHEATMAP;
     private int shotValue;
 
     public Shooter(int xSize, int ySize, Random rnd) {
-        this.ownHeatMap = new IntMap(xSize, ySize);
-        this.shots = new IntMap(xSize, ySize);
-        this.hunter = new Hunter(this.shots, rnd);
-        this.seeker = new Seeker(this.shots, rnd, this.ownHeatMap);
-        this.hotSpots = new IntMap(xSize, ySize);
+        this.OWNHEATMAP = new IntMap(xSize, ySize);
+        this.SHOTS = new IntMap(xSize, ySize);
+        this.HUNTER = new Hunter(this.SHOTS, rnd);
+        this.SEEKER = new Seeker(this.SHOTS, rnd, this.OWNHEATMAP);
+        this.HOTSPOTS = new IntMap(xSize, ySize);
     }
 
     public void newRound(int round) {
-        this.shots.clear();
+        this.SHOTS.clear();
         this.isHunting = false;
-        this.shotValue = (this.shots.getXSize() * this.shots.getYSize());
+        this.shotValue = (this.SHOTS.getXSize() * this.SHOTS.getYSize());
     }
 
     public Position getFireCoordinates(Fleet enemyShips) {
         if (this.isHunting) {
-            this.lastShot = this.hunter.getFireCoordinates(enemyShips);
+            this.lastShot = this.HUNTER.getFireCoordinates(enemyShips);
         } else {
-            this.lastShot = this.seeker.getFireCoordinates(this.hotSpots, enemyShips);
+            this.lastShot = this.SEEKER.getFireCoordinates(this.HOTSPOTS, enemyShips);
         }
-        this.ownHeatMap.add(this.lastShot.x, this.lastShot.y, this.shotValue--);
+        this.OWNHEATMAP.add(this.lastShot.x, this.lastShot.y, this.shotValue--);
         return this.lastShot;
     }
 
     public void hitFeedBack(boolean hit, Fleet enemyShips) {
         if (hit) {
-            this.hotSpots.add(this.lastShot.x, this.lastShot.y, 1);
+            this.HOTSPOTS.add(this.lastShot.x, this.lastShot.y, 1);
         }
         if (this.isHunting) {
-            this.isHunting = this.hunter.hitFeedback(hit, enemyShips);
+            this.isHunting = this.HUNTER.hitFeedback(hit, enemyShips);
         } else if (hit) {
             this.isHunting = true;
-            this.shots.set(this.lastShot.x, this.lastShot.y, 1);
-            this.hunter.startHunt(this.lastShot, enemyShips);
+            this.SHOTS.set(this.lastShot.x, this.lastShot.y, 1);
+            this.HUNTER.startHunt(this.lastShot, enemyShips);
         } else {
-            this.shots.set(this.lastShot.x, this.lastShot.y, -1);
+            this.SHOTS.set(this.lastShot.x, this.lastShot.y, -1);
         }
     }
 }

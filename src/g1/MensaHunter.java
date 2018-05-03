@@ -12,22 +12,22 @@ import g4.shots.Shooter;
 
 public class MensaHunter implements BattleshipsPlayer {
 
-    private final Random rnd;
+    private final Random RANDOM;
     private FloatMap ownHotspots;
     private Shooter shooter;
     private ShipPlacer placer;
     private int round;
 
     public MensaHunter() {
-        this.rnd = new Random();
+        this.RANDOM = new Random();
         this.shooter = null;
         this.placer = null;
     }
 
     @Override
     public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY) {
-        this.shooter = new Shooter(sizeX, sizeY, this.rnd);
-        this.placer = new ShipPlacer(sizeX, sizeY, this.rnd);
+        this.shooter = new Shooter(sizeX, sizeY, this.RANDOM);
+        this.placer = new ShipPlacer(sizeX, sizeY, this.RANDOM);
         this.ownHotspots = new FloatMap(sizeX, sizeY);
     }
 
