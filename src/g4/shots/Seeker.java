@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import g1.map.FloatMap;
-import g1.map.IntMap;
+import g1.maps.FloatMap;
+import g1.maps.IntMap;
 
 public class Seeker {
 

@@ -3,7 +3,7 @@ package g1.ships;
 import battleship.interfaces.Board;
 import battleship.interfaces.Position;
 import battleship.interfaces.Ship;
-import g1.map.FloatMap;
+import g1.maps.FloatMap;
 
 public class HotspotBoard implements Board {
 

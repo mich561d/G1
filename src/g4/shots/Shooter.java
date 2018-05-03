@@ -3,7 +3,7 @@ package g4.shots;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
 import java.util.Random;
-import g1.map.IntMap;
+import g1.maps.IntMap;
 
 public class Shooter {
 

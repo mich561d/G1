@@ -5,7 +5,7 @@ import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
 import java.util.Random;
-import g1.map.FloatMap;
+import g1.maps.FloatMap;
 import g1.ships.HotspotBoard;
 import g1.ships.ShipPlacer;
 import g4.shots.Shooter;

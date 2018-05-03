@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import g1.map.BooleanMap;
-import g1.map.IntMap;
+import g1.maps.BooleanMap;
+import g1.maps.IntMap;
 
 public class ShipPlacer {
 
