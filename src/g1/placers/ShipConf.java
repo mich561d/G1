@@ -3,8 +3,7 @@ package g1.placers;
 import battleship.interfaces.Position;
 import battleship.interfaces.Ship;
 
-public class ShipConf
-        implements Comparable<ShipConf> {
+public class ShipConf implements Comparable<ShipConf> {
 
     private final Ship ship;
     private final Position pos;

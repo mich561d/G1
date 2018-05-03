@@ -5,8 +5,7 @@ import battleship.interfaces.Position;
 import battleship.interfaces.Ship;
 import g1.maps.FloatMap;
 
-public class HotspotBoard
-        implements Board {
+public class HotspotBoard implements Board {
 
     private final Board original;
     private final FloatMap hotspots;
