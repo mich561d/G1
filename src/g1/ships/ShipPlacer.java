@@ -13,7 +13,7 @@ import g1.maps.IntMap;
 
 public class ShipPlacer {
 
-    private final boolean ADJECENTSHIPS = false, USEHEATMAP = true;
+    private final boolean ADJECENTSHIPS = true, USEHEATMAP = true;
     private final Random RANDOM;
     private int shotValue;
     private final int XSIZE, YSIZE;

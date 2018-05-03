@@ -8,7 +8,7 @@ import java.util.Random;
 import g1.maps.FloatMap;
 import g1.ships.HotspotBoard;
 import g1.ships.ShipPlacer;
-import g4.shots.Shooter;
+import g1.shots.Shooter;
 
 public class MensaHunter implements BattleshipsPlayer {
 

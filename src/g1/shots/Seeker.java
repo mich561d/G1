@@ -1,4 +1,4 @@
-package g4.shots;
+package g1.shots;
 
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
