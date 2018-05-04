@@ -1,4 +1,4 @@
-package g1.ships;
+package ships;
 
 import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import g1.maps.BooleanMap;
-import g1.maps.IntMap;
+import maps.MapFrame;
+import maps.Map;
 
 public class ShipPlacer {
 
@@ -17,16 +17,16 @@ public class ShipPlacer {
     private final Random RANDOM;
     private int shotValue;
     private final int XSIZE, YSIZE;
-    private final IntMap HEATMAP;
-    private final BooleanMap SHIPMAP;
+    private final Map HEATMAP;
+    private final MapFrame SHIPMAP;
     private final Position[][] POSITIONS;
 
     public ShipPlacer(int xSize, int ySize, Random rnd) {
         this.RANDOM = rnd;
         this.XSIZE = xSize;
         this.YSIZE = ySize;
-        this.HEATMAP = new IntMap(xSize, ySize);
-        this.SHIPMAP = new BooleanMap(xSize, ySize);
+        this.HEATMAP = new Map(xSize, ySize);
+        this.SHIPMAP = new MapFrame(xSize, ySize);
         this.POSITIONS = new Position[xSize][ySize];
         for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
@@ -45,8 +45,8 @@ public class ShipPlacer {
         }
         Collections.shuffle(ships);
         for (Ship s : ships) {
-            List<ShipConf> confs = getConfigurations(s);
-            ShipConf conf = selectConf(confs);
+            List<ShipOptions> confs = getConfigurations(s);
+            ShipOptions conf = selectConf(confs);
             if (conf != null) {
                 placeShip(conf, board);
             }
@@ -57,27 +57,27 @@ public class ShipPlacer {
         this.HEATMAP.add(pos.x, pos.y, this.shotValue--);
     }
 
-    private ShipConf selectConf(List<ShipConf> confs) {
+    private ShipOptions selectConf(List<ShipOptions> confs) {
         int count = confs.size();
         if (confs.isEmpty()) {
             return null;
         }
         if (this.USEHEATMAP) {
             Collections.sort(confs);
-            int bestValue = ((ShipConf) confs.get(0)).getValue();
+            int bestValue = ((ShipOptions) confs.get(0)).getValue();
             count = 1;
             for (int i = 1; i < confs.size(); i++) {
-                ShipConf c = (ShipConf) confs.get(i);
+                ShipOptions c = (ShipOptions) confs.get(i);
                 if (c.getValue() > bestValue) {
                     break;
                 }
                 count++;
             }
         }
-        return (ShipConf) confs.get(this.RANDOM.nextInt(count));
+        return (ShipOptions) confs.get(this.RANDOM.nextInt(count));
     }
 
-    private void placeShip(ShipConf conf, Board board) {
+    private void placeShip(ShipOptions conf, Board board) {
         int size = conf.getShip().size();
         board.placeShip(conf.getPosition(), conf.getShip(), conf.getVertical());
         if (conf.getVertical()) {
@@ -127,9 +127,9 @@ public class ShipPlacer {
         }
     }
 
-    private List<ShipConf> getConfigurations(Ship ship) {
+    private List<ShipOptions> getConfigurations(Ship ship) {
         int size = ship.size();
-        List<ShipConf> res = new ArrayList();
+        List<ShipOptions> res = new ArrayList();
         for (int y = 0; y < this.YSIZE; y++) {
             for (int x = 0; x <= this.XSIZE - size; x++) {
                 boolean validPos = true;
@@ -142,7 +142,7 @@ public class ShipPlacer {
                     value += this.HEATMAP.get(x + i, y);
                 }
                 if (validPos) {
-                    res.add(new ShipConf(ship, this.POSITIONS[x][y], false, value));
+                    res.add(new ShipOptions(ship, this.POSITIONS[x][y], false, value));
                 }
             }
         }
@@ -158,7 +158,7 @@ public class ShipPlacer {
                     value += this.HEATMAP.get(x, y + i);
                 }
                 if (validPos) {
-                    res.add(new ShipConf(ship, this.POSITIONS[x][y], true, value));
+                    res.add(new ShipOptions(ship, this.POSITIONS[x][y], true, value));
                 }
             }
         }

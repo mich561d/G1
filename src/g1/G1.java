@@ -17,7 +17,7 @@ public class G1 implements PlayerFactory<BattleshipsPlayer> {
 
     @Override
     public String getName() {
-        return "Mensa Hunter";
+        return "HMS Hood";
     }
 
     @Override

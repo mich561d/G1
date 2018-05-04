@@ -1,15 +1,15 @@
-package g1.maps;
+package maps;
 
 import battleship.interfaces.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntMap {
+public class Map {
 
     private final int[][] MAP;
     private final int XSIZE, YSIZE;
 
-    public IntMap(int xSize, int ySize) {
+    public Map(int xSize, int ySize) {
         this.MAP = new int[xSize][ySize];
         this.XSIZE = xSize;
         this.YSIZE = ySize;

@@ -1,4 +1,4 @@
-package g1.shots;
+package shots;
 
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
@@ -6,20 +6,20 @@ import battleship.interfaces.Ship;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import g1.maps.IntMap;
+import maps.Map;
 
-public class Hunter {
+public class Target {
 
     private final Random RANDOM;
-    private final IntMap SHOTS, SHIPDIST;
+    private final Map SHOTS, SHIPDIST;
     private final List<Position> HITS;
     private Position lastShot;
     private int numHits, startFleetSum;
 
-    public Hunter(IntMap shots, Random rnd) {
+    public Target(Map shots, Random rnd) {
         this.RANDOM = rnd;
         this.SHOTS = shots;
-        this.SHIPDIST = new IntMap(shots.getXSize(), shots.getYSize());
+        this.SHIPDIST = new Map(shots.getXSize(), shots.getYSize());
         this.HITS = new ArrayList();
     }
 

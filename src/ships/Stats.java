@@ -1,16 +1,16 @@
-package g1.ships;
+package ships;
 
 import battleship.interfaces.Board;
 import battleship.interfaces.Position;
 import battleship.interfaces.Ship;
-import g1.maps.FloatMap;
+import maps.HeatMap;
 
-public class HotspotBoard implements Board {
+public class Stats implements Board {
 
     private final Board ORIGINAL;
-    private final FloatMap HOTSPOTS;
+    private final HeatMap HOTSPOTS;
 
-    public HotspotBoard(Board original, FloatMap hotspots) {
+    public Stats(Board original, HeatMap hotspots) {
         this.ORIGINAL = original;
         this.HOTSPOTS = hotspots;
     }

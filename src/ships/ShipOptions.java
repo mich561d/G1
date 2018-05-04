@@ -1,16 +1,16 @@
-package g1.ships;
+package ships;
 
 import battleship.interfaces.Position;
 import battleship.interfaces.Ship;
 
-public class ShipConf implements Comparable<ShipConf> {
+public class ShipOptions implements Comparable<ShipOptions> {
 
     private final Ship SHIP;
     private final Position POS;
     private final boolean VERTICAL;
     private final int VALUE;
 
-    public ShipConf(Ship ship, Position pos, boolean vertical, int value) {
+    public ShipOptions(Ship ship, Position pos, boolean vertical, int value) {
         this.SHIP = ship;
         this.POS = pos;
         this.VERTICAL = vertical;
@@ -34,7 +34,7 @@ public class ShipConf implements Comparable<ShipConf> {
     }
 
     @Override
-    public int compareTo(ShipConf object) {
+    public int compareTo(ShipOptions object) {
         return this.VALUE - object.VALUE;
     }
 }

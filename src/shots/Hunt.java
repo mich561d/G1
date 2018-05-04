@@ -1,4 +1,4 @@
-package g1.shots;
+package shots;
 
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
@@ -7,24 +7,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import g1.maps.FloatMap;
-import g1.maps.IntMap;
+import maps.HeatMap;
+import maps.Map;
 
-public class Seeker {
+public class Hunt {
 
     private final Random RANDOM;
-    private final IntMap SHOTS, OWNHEAT;
-    private final FloatMap SHIPDIST;
+    private final Map SHOTS, OWNHEAT;
+    private final HeatMap SHIPDIST;
     private Position lastShot;
 
-    public Seeker(IntMap shots, Random rnd, IntMap ownHeat) {
+    public Hunt(Map shots, Random rnd, Map ownHeat) {
         this.RANDOM = rnd;
         this.SHOTS = shots;
-        this.SHIPDIST = new FloatMap(shots.getXSize(), shots.getYSize());
+        this.SHIPDIST = new HeatMap(shots.getXSize(), shots.getYSize());
         this.OWNHEAT = ownHeat;
     }
 
-    public Position getFireCoordinates(IntMap hotSpots, Fleet enemyShips) {
+    public Position getFireCoordinates(Map hotSpots, Fleet enemyShips) {
         generateShipDistribution(enemyShips);
         List<Position> bestCoordinates = this.SHIPDIST.getHighest();
 
@@ -34,7 +34,7 @@ public class Seeker {
         return this.lastShot;
     }
 
-    private List<Position> avoidHeat(List<Position> positions, IntMap ownHeat) {
+    private List<Position> avoidHeat(List<Position> positions, Map ownHeat) {
         int min = Integer.MAX_VALUE;
         for (Iterator localIterator = positions.iterator(); localIterator.hasNext();) {
             Position p = (Position) localIterator.next();

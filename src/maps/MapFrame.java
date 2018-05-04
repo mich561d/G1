@@ -1,11 +1,11 @@
-package g1.maps;
+package maps;
 
-public class BooleanMap {
+public class MapFrame {
 
     private final boolean[][] MAP;
     private final int XSIZE, YSIZE;
 
-    public BooleanMap(int xSize, int ySize) {
+    public MapFrame(int xSize, int ySize) {
         this.MAP = new boolean[xSize][ySize];
         this.XSIZE = xSize;
         this.YSIZE = ySize;

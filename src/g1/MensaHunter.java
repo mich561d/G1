@@ -5,16 +5,16 @@ import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
 import java.util.Random;
-import g1.maps.FloatMap;
-import g1.ships.HotspotBoard;
-import g1.ships.ShipPlacer;
-import g1.shots.Shooter;
+import maps.HeatMap;
+import ships.Stats;
+import ships.ShipPlacer;
+import shots.Terminator;
 
 public class MensaHunter implements BattleshipsPlayer {
 
     private final Random RANDOM;
-    private FloatMap ownHotspots;
-    private Shooter shooter;
+    private HeatMap ownHotspots;
+    private Terminator shooter;
     private ShipPlacer placer;
     private int round;
 
@@ -26,9 +26,9 @@ public class MensaHunter implements BattleshipsPlayer {
 
     @Override
     public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY) {
-        this.shooter = new Shooter(sizeX, sizeY, this.RANDOM);
+        this.shooter = new Terminator(sizeX, sizeY, this.RANDOM);
         this.placer = new ShipPlacer(sizeX, sizeY, this.RANDOM);
-        this.ownHotspots = new FloatMap(sizeX, sizeY);
+        this.ownHotspots = new HeatMap(sizeX, sizeY);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class MensaHunter implements BattleshipsPlayer {
     @Override
     public void placeShips(Fleet fleet, Board board) {
         this.shooter.newRound(this.round);
-        this.placer.placeShips(fleet, new HotspotBoard(board, this.ownHotspots));
+        this.placer.placeShips(fleet, new Stats(board, this.ownHotspots));
     }
 
     @Override

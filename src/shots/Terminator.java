@@ -1,26 +1,26 @@
-package g1.shots;
+package shots;
 
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
 import java.util.Random;
-import g1.maps.IntMap;
+import maps.Map;
 
-public class Shooter {
+public class Terminator {
 
-    private final IntMap SHOTS;
+    private final Map SHOTS;
     private Position lastShot;
     private boolean isHunting;
-    private final Hunter HUNTER;
-    private final Seeker SEEKER;
-    private final IntMap HOTSPOTS, OWNHEATMAP;
+    private final Target HUNTER;
+    private final Hunt SEEKER;
+    private final Map HOTSPOTS, OWNHEATMAP;
     private int shotValue;
 
-    public Shooter(int xSize, int ySize, Random rnd) {
-        this.OWNHEATMAP = new IntMap(xSize, ySize);
-        this.SHOTS = new IntMap(xSize, ySize);
-        this.HUNTER = new Hunter(this.SHOTS, rnd);
-        this.SEEKER = new Seeker(this.SHOTS, rnd, this.OWNHEATMAP);
-        this.HOTSPOTS = new IntMap(xSize, ySize);
+    public Terminator(int xSize, int ySize, Random rnd) {
+        this.OWNHEATMAP = new Map(xSize, ySize);
+        this.SHOTS = new Map(xSize, ySize);
+        this.HUNTER = new Target(this.SHOTS, rnd);
+        this.SEEKER = new Hunt(this.SHOTS, rnd, this.OWNHEATMAP);
+        this.HOTSPOTS = new Map(xSize, ySize);
     }
 
     public void newRound(int round) {

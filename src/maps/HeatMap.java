@@ -1,15 +1,15 @@
-package g1.maps;
+package maps;
 
 import battleship.interfaces.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FloatMap {
+public class HeatMap {
 
     private final float[][] MAP;
     private final int XSIZE, YSIZE;
 
-    public FloatMap(int xSize, int ySize) {
+    public HeatMap(int xSize, int ySize) {
         this.MAP = new float[xSize][ySize];
         this.XSIZE = xSize;
         this.YSIZE = ySize;
@@ -51,7 +51,7 @@ public class FloatMap {
         return this.MAP[x][y];
     }
 
-    public FloatMap getNormalized() {
+    public HeatMap getNormalized() {
         float max = 0.0F;
         for (int x = 0; x < this.XSIZE; x++) {
             for (int y = 0; y < this.YSIZE; y++) {
@@ -60,7 +60,7 @@ public class FloatMap {
                 }
             }
         }
-        FloatMap res = new FloatMap(this.XSIZE, this.YSIZE);
+        HeatMap res = new HeatMap(this.XSIZE, this.YSIZE);
         if (max > 0.0F) {
             float invMax = 1.0F / max;
             for (int x = 0; x < this.XSIZE; x++) {
@@ -111,8 +111,8 @@ public class FloatMap {
         return res;
     }
 
-    public FloatMap reverse() {
-        FloatMap res = new FloatMap(this.XSIZE, this.YSIZE);
+    public HeatMap reverse() {
+        HeatMap res = new HeatMap(this.XSIZE, this.YSIZE);
         for (int x = 0; x < this.XSIZE; x++) {
             for (int y = 0; y < this.YSIZE; y++) {
                 res.MAP[x][y] = (1.0F - this.MAP[x][y]);
@@ -121,11 +121,11 @@ public class FloatMap {
         return res;
     }
 
-    public FloatMap add(FloatMap fMap) {
+    public HeatMap add(HeatMap fMap) {
         if ((this.XSIZE != fMap.XSIZE) || (this.YSIZE != fMap.YSIZE)) {
             throw new RuntimeException("FloatMap.add -> Maps are not the same size...");
         }
-        FloatMap res = new FloatMap(this.XSIZE, this.YSIZE);
+        HeatMap res = new HeatMap(this.XSIZE, this.YSIZE);
         for (int x = 0; x < this.XSIZE; x++) {
             for (int y = 0; y < this.YSIZE; y++) {
                 this.MAP[x][y] += fMap.MAP[x][y];
