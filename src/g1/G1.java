@@ -7,7 +7,7 @@ public class G1 implements PlayerFactory<BattleshipsPlayer> {
 
     @Override
     public BattleshipsPlayer getNewInstance() {
-        return new MensaHunter();
+        return new HMSHood();
     }
 
     @Override

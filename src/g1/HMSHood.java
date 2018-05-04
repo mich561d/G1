@@ -10,7 +10,7 @@ import ships.Stats;
 import ships.ShipPlacer;
 import shots.Terminator;
 
-public class MensaHunter implements BattleshipsPlayer {
+public class HMSHood implements BattleshipsPlayer {
 
     private final Random RANDOM;
     private HeatMap ownHotspots;
@@ -18,7 +18,7 @@ public class MensaHunter implements BattleshipsPlayer {
     private ShipPlacer placer;
     private int round;
 
-    public MensaHunter() {
+    public HMSHood() {
         this.RANDOM = new Random();
         this.shooter = null;
         this.placer = null;

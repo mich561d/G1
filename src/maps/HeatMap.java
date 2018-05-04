@@ -122,9 +122,6 @@ public class HeatMap {
     }
 
     public HeatMap add(HeatMap fMap) {
-        if ((this.XSIZE != fMap.XSIZE) || (this.YSIZE != fMap.YSIZE)) {
-            throw new RuntimeException("FloatMap.add -> Maps are not the same size...");
-        }
         HeatMap res = new HeatMap(this.XSIZE, this.YSIZE);
         for (int x = 0; x < this.XSIZE; x++) {
             for (int y = 0; y < this.YSIZE; y++) {
