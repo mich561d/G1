@@ -4,9 +4,10 @@ Programmers: Christian, Jesper og Michael
 [Dropbox link](https://www.dropbox.com/sh/2znvqj1f2gienot/AAAUgwzwN4e6xUoLMfg2gxexa?dl=0)
 
 TODO:
-1. Make a plan
-2. Follow the plan
-3. Finish the plan
+1. Improved AI's adaptives compatility
+2. Get X11
+3. Beat X11
+4. Happy Life with beers!
 
 # Links:
 1. http://www.datagenetics.com/blog/december32011/index.html
