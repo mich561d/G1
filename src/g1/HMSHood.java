@@ -13,7 +13,7 @@ import shots.Terminator;
 public class HMSHood implements BattleshipsPlayer {
 
     private final Random RANDOM;
-    private HeatMap ownHotspots;
+    private HeatMap hotspots;
     private Terminator shooter;
     private ShipPlacer placer;
     private int round;
@@ -28,7 +28,7 @@ public class HMSHood implements BattleshipsPlayer {
     public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY) {
         this.shooter = new Terminator(sizeX, sizeY, this.RANDOM);
         this.placer = new ShipPlacer(sizeX, sizeY, this.RANDOM);
-        this.ownHotspots = new HeatMap(sizeX, sizeY);
+        this.hotspots = new HeatMap(sizeX, sizeY);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class HMSHood implements BattleshipsPlayer {
     @Override
     public void placeShips(Fleet fleet, Board board) {
         this.shooter.newRound(this.round);
-        this.placer.placeShips(fleet, new Stats(board, this.ownHotspots));
+        this.placer.placeShips(fleet, new Stats(board, this.hotspots));
     }
 
     @Override
