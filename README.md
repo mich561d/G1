@@ -1,4 +1,4 @@
-# Batteship Asignment: Gruppe 1 - Mensa Shooter
+# Batteship Asignment: Gruppe 1 - HMS Hood
 Programmers: Christian, Jesper og Michael
 
 [Dropbox link](https://www.dropbox.com/sh/2znvqj1f2gienot/AAAUgwzwN4e6xUoLMfg2gxexa?dl=0)
@@ -8,6 +8,13 @@ TODO:
 2. Get X11
 3. Beat X11
 4. Happy Life with beers!
+
+TODUE:
+1. Implements stats (Stats.java)
+2. Implements our own heatmaps against the enemy (Stats.java)
+3. Better shooting via stats
+4. Better ship placement via stats
+5. Vermintide II
 
 # Links:
 1. http://www.datagenetics.com/blog/december32011/index.html
