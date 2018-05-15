@@ -9,6 +9,13 @@ TODO:
 3. Beat X11
 4. Happy Life with beers!
 
+TODUE:
+1. Implements stats (Stats.java)
+2. Implements our own heatmaps against the enemy (Stats.java)
+3. Better shooting via stats
+4. Better ship placement via stats
+5. Vermintide II
+
 # Links:
 1. http://www.datagenetics.com/blog/december32011/index.html
 2. http://www.ultrabattleship.com/tips.php
