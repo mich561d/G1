@@ -2,6 +2,7 @@ package shots;
 
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
+import g1.StatsMaps;
 import java.util.Random;
 import maps.Map;
 
@@ -39,9 +40,10 @@ public class Terminator {
         return this.lastShot;
     }
 
-    public void hitFeedBack(boolean hit, Fleet enemyShips) {
+    public void hitFeedBack(boolean hit, Fleet enemyShips, StatsMaps stats) {
         if (hit) {
             this.HOTSPOTS.add(this.lastShot.x, this.lastShot.y, 1);
+            stats.PickMap("ESHIPMAP", lastShot);
         }
         if (this.isHunting) {
             this.isHunting = this.HUNTER.hitFeedback(hit, enemyShips);
@@ -52,5 +54,6 @@ public class Terminator {
         } else {
             this.SHOTS.set(this.lastShot.x, this.lastShot.y, -1);
         }
+        stats.PickMap("HITMAP", lastShot);
     }
 }

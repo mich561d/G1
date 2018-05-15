@@ -4,6 +4,7 @@ import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
 import battleship.interfaces.Ship;
+import g1.StatsMaps;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ShipPlacer {
         }
     }
 
-    public void placeShips(Fleet fleet, Board board) {
+    public void placeShips(Fleet fleet, Board board, StatsMaps stats) {
         this.shotValue = (this.XSIZE * this.YSIZE);
         this.SHIPMAP.clear();
 
@@ -48,7 +49,7 @@ public class ShipPlacer {
             List<ShipOptions> confs = getConfigurations(s);
             ShipOptions conf = selectConf(confs);
             if (conf != null) {
-                placeShip(conf, board);
+                placeShip(conf, board, stats);
             }
         }
     }
@@ -77,7 +78,7 @@ public class ShipPlacer {
         return (ShipOptions) confs.get(this.RANDOM.nextInt(count));
     }
 
-    private void placeShip(ShipOptions conf, Board board) {
+    private void placeShip(ShipOptions conf, Board board, StatsMaps stats) {
         int size = conf.getShip().size();
         board.placeShip(conf.getPosition(), conf.getShip(), conf.getVertical());
         if (conf.getVertical()) {
@@ -98,6 +99,7 @@ public class ShipPlacer {
                 if (!this.ADJECENTSHIPS) {
                     markShipPoint(x + 1, y + i);
                 }
+                stats.PickMap("SHIPMAP", new Position(x, y+i));
             }
         } else {
             int y = conf.getPosition().y;
@@ -117,6 +119,7 @@ public class ShipPlacer {
                 if (!this.ADJECENTSHIPS) {
                     markShipPoint(x + i, y + 1);
                 }
+                stats.PickMap("SHIPMAP", new Position(x+i, y));
             }
         }
     }
