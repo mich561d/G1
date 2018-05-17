@@ -7,7 +7,7 @@ public class G1 implements PlayerFactory<BattleshipsPlayer> {
 
     @Override
     public BattleshipsPlayer getNewInstance() {
-        return new HMSHood();
+        return new KDM_Absalon();
     }
 
     @Override
@@ -17,7 +17,7 @@ public class G1 implements PlayerFactory<BattleshipsPlayer> {
 
     @Override
     public String getName() {
-        return "HMS Hood";
+        return "KDM Absalon";
     }
 
     @Override

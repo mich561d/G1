@@ -10,7 +10,7 @@ import ships.Stats;
 import ships.ShipPlacer;
 import shots.Terminator;
 
-public class HMSHood implements BattleshipsPlayer {
+public class KDM_Absalon implements BattleshipsPlayer {
 
     private final Random RANDOM;
     private StatsMaps stats;
@@ -19,7 +19,7 @@ public class HMSHood implements BattleshipsPlayer {
     private ShipPlacer placer;
     private int round;
 
-    public HMSHood() {
+    public KDM_Absalon() {
         this.RANDOM = new Random();
         this.shooter = null;
         this.placer = null;
